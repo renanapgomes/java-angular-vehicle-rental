@@ -1,11 +1,10 @@
 # desafio-tecnico-solides
 
-Sistema de **aluguel de veículos** (teste técnico): API REST em **Spring Boot** (arquitetura em camadas inspirada em `desafio-tecnico-coupon`) e app **Ionic + Angular** (estrutura semelhante ao `dpesp-meurh2`: módulos, rotas lazy, serviços, `shared/models`).
+Sistema de **aluguel de veículos** (teste técnico): API REST em **Spring Boot** (arquitetura em camadas inspirada em e app ** Angular** : módulos, rotas lazy, serviços, `shared/models`).
 
 ## Documentação por módulo
 
 - **[backend/README.md](backend/README.md)** — arquitetura, pacotes, endpoints, testes e JaCoCo (estilo **Coupon API**).
-- **[frontend/README.md](frontend/README.md)** — (Ionic + Angular) rotas, diagrama de navegação, estrutura de pastas e UX das abas.
 - **[frontend-angular/README.md](frontend-angular/README.md)** — (Angular puro) rotas e execução do frontend.
 
 ## Requisitos
@@ -138,7 +137,6 @@ Relatório de cobertura: `backend/build/reports/jacoco/test/html/index.html`.
 ```
 desafio-tecnico-solides/
 ├── backend/          # Spring Boot (Gradle) + README.md
-├── frontend/         # Ionic + Angular + README.md
 ├── frontend-angular/ # Angular puro + README.md
 ├── docker-compose.yml
 └── README.md
