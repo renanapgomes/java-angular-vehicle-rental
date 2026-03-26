@@ -1,0 +1,85 @@
+<div class="page">
+  <div class="header-row">
+    <h1>Veículos</h1>
+    <a class="btn btn-primary" routerLink="/veiculos/novo">+ Adicionar</a>
+  </div>
+
+  <section class="card">
+    <h2>Lista de veículos</h2>
+
+    <div *ngIf="loading" class="muted">Carregando...</div>
+    <div *ngIf="!loading && errorMessage" class="error">{{ errorMessage }}</div>
+
+    <table class="table" *ngIf="vehicles.length; else noVehicles">
+      <thead>
+        <tr>
+          <th>Placa</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Ano</th>
+          <th>Diária</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of vehicles">
+          <td>{{ v.plate }}</td>
+          <td>{{ v.brand }}</td>
+          <td>{{ v.model }}</td>
+          <td>{{ v.year ?? '-' }}</td>
+          <td>{{ formatMoney(v.dailyRate) }}</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="excluir(v)" [disabled]="loading">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noVehicles>
+      <p class="muted">Nenhum veículo cadastrado.</p>
+    </ng-template>
+  </section>
+
+  <section class="card">
+    <h2>Disponibilidade</h2>
+
+    <div class="form-row">
+      <label>
+        De
+        <input type="date" [(ngModel)]="fromDate" />
+      </label>
+      <label>
+        Até
+        <input type="date" [(ngModel)]="toDate" />
+      </label>
+      <button class="btn btn-primary" type="button" (click)="consultarDisponibilidade()">
+        Consultar
+      </button>
+    </div>
+
+    <div *ngIf="available.length">
+      <h3>Veículos disponíveis</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Diária</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of available">
+            <td>{{ v.plate }}</td>
+            <td>{{ v.brand }}</td>
+            <td>{{ v.model }}</td>
+            <td>{{ formatMoney(v.dailyRate) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="!available.length && fromDate && toDate" class="muted">
+      Nenhum veículo disponível no período.
+    </div>
+  </section>
+</div>
+

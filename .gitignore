@@ -1,0 +1,9 @@
+**/node_modules/
+**/www/
+**/dist/
+**/.angular/
+**/.gradle/
+**/build/
+**/.idea/
+*.iml
+.DS_Store

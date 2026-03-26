@@ -1,0 +1,41 @@
+<div class="page">
+  <div class="header-row">
+    <h1>Novo cliente</h1>
+    <button class="btn" type="button" (click)="back()">Voltar</button>
+  </div>
+
+  <section class="card">
+    <h2>Cadastro</h2>
+
+    <form (ngSubmit)="save()" class="form">
+      <div class="form-grid">
+      <label>
+        Nome completo
+        <input type="text" name="fullName" required [(ngModel)]="fullName" />
+      </label>
+
+      <label>
+        CPF (11 dígitos)
+        <input type="text" name="document" inputmode="numeric" required appCpfMask [(ngModel)]="document" />
+      </label>
+
+      <label>
+        E-mail
+        <input type="email" name="email" required [(ngModel)]="email" />
+      </label>
+
+      <label>
+        Telefone (opcional)
+        <input type="text" name="phone" inputmode="tel" appPhoneMask [(ngModel)]="phone" />
+      </label>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="loading">
+      {{ loading ? 'Salvando...' : 'Salvar' }}
+    </button>
+    </form>
+  </section>
+</div>
+

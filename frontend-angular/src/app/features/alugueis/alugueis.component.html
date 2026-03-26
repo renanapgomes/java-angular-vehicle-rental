@@ -1,0 +1,94 @@
+<div class="page">
+  <h1>Aluguéis</h1>
+
+  <div class="grid-2">
+    <section class="card">
+      <h2>Novo aluguel</h2>
+
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+      <form (ngSubmit)="registrar()" class="form">
+        <label>
+          Cliente
+          <select [(ngModel)]="selectedClientId" name="clientId" required>
+            <option value="" disabled selected>Selecione</option>
+            <option *ngFor="let c of clients" [value]="c.id">{{ c.fullName }}</option>
+          </select>
+        </label>
+
+        <label>
+          Período (inicial)
+          <input type="date" [(ngModel)]="fromDate" name="fromDate" required />
+        </label>
+
+        <label>
+          Período (final)
+          <input type="date" [(ngModel)]="toDate" name="toDate" required />
+        </label>
+
+        <div class="form-row">
+          <button type="button" class="btn" (click)="carregarDisponiveis()">Carregar disponíveis</button>
+        </div>
+
+        <label>
+          Veículo
+          <select [(ngModel)]="selectedVehicleId" name="vehicleId" required>
+            <option value="" disabled selected>Selecione</option>
+            <optgroup label="Disponíveis (período)">
+              <option *ngFor="let v of availableVehicles" [value]="v.id">{{ v.plate }} - {{ v.brand }} {{ v.model }}</option>
+            </optgroup>
+            <optgroup label="Todos (fallback)">
+              <option *ngFor="let v of vehicles" [value]="v.id">{{ v.plate }} - {{ v.brand }} {{ v.model }}</option>
+            </optgroup>
+          </select>
+        </label>
+
+        <div *ngIf="previewTotalAmount != null" class="total-preview">
+          Valor total estimado: <strong>{{ formatMoney(previewTotalAmount) }}</strong>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? 'Registrando...' : 'Registrar aluguel' }}
+        </button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Histórico</h2>
+
+      <div *ngIf="!rentals.length" class="muted">Nenhum aluguel registrado.</div>
+
+      <div *ngFor="let r of rentals" class="rental-item">
+        <div class="rental-left">
+          <div class="rental-title">{{ getVehicleLabelByRental(r) }}</div>
+          <div class="rental-subtitle">
+            {{ r.clientName || r.clientId }} · {{ r.startDate }} → {{ r.endDate }}
+          </div>
+        </div>
+
+        <div class="rental-right">
+          <div class="rental-total">
+            Total <strong>{{ formatMoney(r.totalAmount) }}</strong>
+          </div>
+          <div
+            class="status-badge"
+            [ngClass]="r.status === 'ACTIVE' ? 'status-active' : 'status-cancelled'"
+          >
+            {{ getRentalStatusLabel(r.status) }}
+          </div>
+
+          <button
+            *ngIf="r.status === 'ACTIVE'"
+            type="button"
+            class="btn btn-danger rental-cancel"
+            (click)="cancelar(r)"
+            [disabled]="loading"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+

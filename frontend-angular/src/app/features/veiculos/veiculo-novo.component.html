@@ -1,0 +1,41 @@
+<div class="page">
+  <div class="header-row">
+    <h1>Novo veículo</h1>
+    <button class="btn" type="button" (click)="back()">Voltar</button>
+  </div>
+
+  <section class="card">
+    <h2>Cadastro</h2>
+
+    <form (ngSubmit)="save()" class="form">
+      <div class="form-grid">
+      <label>
+        Placa
+        <input type="text" name="plate" required [(ngModel)]="plate" placeholder="ABC1D23" />
+      </label>
+      <label>
+        Marca
+        <input type="text" name="brand" required [(ngModel)]="brand" placeholder="Fiat" />
+      </label>
+      <label>
+        Modelo
+        <input type="text" name="model" required [(ngModel)]="model" placeholder="Mobi" />
+      </label>
+      <label>
+        Ano (opcional)
+        <input type="number" name="year" [(ngModel)]="year" />
+      </label>
+      <label>
+        Diária
+        <input type="number" name="dailyRate" required step="0.01" min="0.01" [(ngModel)]="dailyRate" />
+      </label>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <button class="btn btn-primary" type="submit" [disabled]="loading">
+      {{ loading ? 'Salvando...' : 'Salvar' }}
+    </button>
+    </form>
+  </section>
+</div>
+

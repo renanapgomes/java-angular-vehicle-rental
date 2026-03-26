@@ -1,0 +1,14 @@
+﻿<header class="topbar">
+  <div class="container">
+    <div class="brand">Aluguel de Veículos</div>
+    <nav class="nav">
+      <a routerLink="/veiculos" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Veículos</a>
+      <a routerLink="/clientes" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Clientes</a>
+      <a routerLink="/alugueis" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Aluguéis</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <router-outlet></router-outlet>
+</main>

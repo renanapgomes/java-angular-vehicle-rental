@@ -1,0 +1,41 @@
+<div class="page">
+  <div class="header-row">
+    <h1>Clientes</h1>
+    <a class="btn btn-primary" routerLink="/clientes/novo">+ Adicionar</a>
+  </div>
+
+  <section class="card">
+    <h2>Lista de clientes</h2>
+
+    <div *ngIf="loading" class="muted">Carregando...</div>
+    <div *ngIf="!loading && errorMessage" class="error">{{ errorMessage }}</div>
+
+    <table class="table" *ngIf="clients.length; else noClients">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of clients">
+          <td>{{ c.fullName }}</td>
+          <td>{{ c.document }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.phone ?? '-' }}</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="excluir(c)" [disabled]="loading">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noClients>
+      <p class="muted">Nenhum cliente cadastrado.</p>
+    </ng-template>
+  </section>
+</div>
+
