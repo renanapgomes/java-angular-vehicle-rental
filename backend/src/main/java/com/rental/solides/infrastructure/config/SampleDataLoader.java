@@ -13,9 +13,6 @@ import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 
-/**
- * Dados de exemplo para desenvolvimento (perfil {@code dev}).
- */
 @Configuration
 @Profile("dev")
 public class SampleDataLoader {

@@ -28,7 +28,6 @@ public class VehicleEntity {
 	@Column(nullable = false, length = 120)
 	private String model;
 
-	/** H2 reserva a palavra {@code YEAR}; coluna física com nome seguro. */
 	@Column(name = "model_year")
 	private Integer year;
 
